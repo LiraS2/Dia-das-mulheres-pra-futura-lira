@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Para Rita - Minha Eterna Conquista</title>
+    
+    <!-- ============================================ -->
+    <!-- FONTE: Playfair Display (serif) para títulos românticos -->
+    <!-- e Poppins (sans-serif) para textos -->
+    <!-- ============================================ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================ */
+        /* VARIÁVEIS DE CORES - PALETA ROMÂNTICA */
+        /* ============================================ */
+        :root {
+            --rosa-suave: #F8E1E7;
+            --rosa-medio: #E8B4C0;
+            --rosa-escuro: #D4849C;
+            --creme: #FDF6F0;
+            --lilas: #E6D5F0;
+            --lilas-escuro: #C9A8DC;
+            --texto-escuro: #4A3F4A;
+            --texto-claro: #7A6B7A;
+            --branco: #FFFFFF;
+            --dourado: #D4AF37;
+        }
+
+        /* ============================================ */
+        /* RESET E CONFIGURAÇÕES GLOBAIS */
+        /* ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, var(--creme) 0%, var(--rosa-suave) 50%, var(--lilas) 100%);
+            color: var(--texto-escuro);
+            overflow-x: hidden;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ============================================ */
+        /* ANIMAÇÕES GLOBAIS */
+        /* ============================================ */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes lanternFloat {
+            0%, 100% { 
+                transform: translateY(0) translateX(0);
+                opacity: 0.7;
+            }
+            25% { 
+                transform: translateY(-20px) translateX(10px);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translateY(-10px) translateX(-5px);
+                opacity: 0.8;
+            }
+            75% { 
+                transform: translateY(-25px) translateX(5px);
+                opacity: 0.95;
+            }
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============================================ */
+        /* BOTÃO DE MÚSICA FIXO */
+        /* ============================================ */
+        .music-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--rosa-medio), var(--lilas-escuro));
+            border: none;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(212, 132, 156, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .music-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(212, 132, 156, 0.6);
+        }
+
+        .music-toggle.playing {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .music-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: white;
+        }
+
+        /* ============================================ */
+        /* HERO SECTION - CABEÇALHO */
+        /* ============================================ */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        /* Fundo com gradiente e padrão de tulipas sutis */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(232, 180, 192, 0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(230, 213, 240, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(248, 225, 231, 0.5) 0%, transparent 70%);
+            z-index: -2;
+        }
+
+        /* Tulipas decorativas flutuantes */
+        .tulip-decoration {
+            position: absolute;
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .tulip-1 {
+            top: 10%;
+            left: 5%;
+            width: 80px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .tulip-2 {
+            top: 20%;
+            right: 8%;
+            width: 60px;
+            animation: float 7s ease-in-out infinite 1s;
+        }
+
+        .tulip-3 {
+            bottom: 15%;
+            left: 10%;
+            width: 70px;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        .tulip-4 {
+            bottom: 25%;
+            right: 5%;
+            width: 90px;
+            animation: float 8s ease-in-out infinite 2s;
+        }
+
+        /* Lanternas flutuantes estilo Enrolados */
+        .lantern {
+            position: absolute;
+            width: 30px;
+            height: 40px;
+            background: radial-gradient(ellipse at center, rgba(255, 220, 150, 0.9) 0%, rgba(255, 180, 100, 0.6) 50%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px rgba(255, 200, 120, 0.5), inset 0 0 10px rgba(255, 240, 200, 0.8);
+            opacity: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .lantern::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 200, 100, 0.8);
+            border-radius: 50%;
+        }
+
+        .lantern-1 { top: 15%; left: 15%; animation: lanternFloat 8s ease-in-out infinite; animation-delay: 0s; }
+        .lantern-2 { top: 25%; right: 20%; animation: lanternFloat 10s ease-in-out infinite; animation-delay: 2s; }
+        .lantern-3 { top: 60%; left: 8%; animation: lanternFloat 9s ease-in-out infinite; animation-delay: 4s; }
+        .lantern-4 { top: 70%; right: 12%; animation: lanternFloat 11s ease-in-out infinite; animation-delay: 1s; }
+        .lantern-5 { top: 40%; left: 25%; animation: lanternFloat 7s ease-in-out infinite; animation-delay: 3s; }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .hero-subtitle {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--rosa-escuro);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.3s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 600;
+            color: var(--texto-escuro);
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-title span {
+            color: var(--rosa-escuro);
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            font-style: italic;
+            color: var(--texto-claro);
+            max-width: 500px;
+            margin: 1.5rem auto;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .hero-heart {
+            font-size: 3rem;
+            color: var(--rosa-escuro);
+            margin-top: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards, heartBeat 1.5s ease-in-out infinite 2s;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-out 1.5s forwards;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.75rem;
+            color: var(--texto-claro);
+            letter-spacing: 2px;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid var(--rosa-escuro);
+            border-bottom: 2px solid var(--rosa-escuro);
+            transform: rotate(45deg);
+            animation: float 2s ease-in-out infinite;
+        }
+
+        /* ============================================ */
+        /* LINHA DO TEMPO - TIMELINE */
+        /* ============================================ */
+        .timeline-section {
+            padding: 5rem 1.5rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            text-align: center;
+            color: var(--texto-escuro);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--rosa-medio), var(--lilas-escuro));
+            margin: 1rem auto 0;
+            border-radius: 2px;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        /* Linha central da timeline */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 3px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--rosa-medio), var(--lilas-escuro), var(--rosa-medio));
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            width: 45%;
+            background: var(--branco);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(212, 132, 156, 0.15);
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(212, 132, 156, 0.25);
+        }
+
+        /* Seta do balão */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 12px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -24px;
+            border-left-color: var(--branco);
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -24px;
+            border-right-color: var(--branco);
+            transform: translateY(-50%);
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--rosa-medio), var(--lilas-escuro));
+            border-radius: 50%;
+            border: 4px solid var(--creme);
+            box-shadow: 0 0 0 4px var(--rosa-medio);
+            z-index: 1;
+        }
+
+        .timeline-date {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--rosa-escuro);
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--texto-escuro);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-description {
+            font-size: 0.9rem;
+            color: var(--texto-claro);
+            line-height: 1.6;
+        }
+
+        .timeline-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Ícone de tulipa no divisor */
+        .timeline-divider {
+            text-align: center;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--rosa-medio), transparent);
+        }
+
+        .tulip-icon {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: var(--creme);
+            border-radius: 50%;
+            position: relative;
+            z-index: 1;
+            padding: 8px;
+        }
+
+        /* ============================================ */
+        /* GALERIA DE FOTOS */
+        /* ============================================ */
+        .gallery-section {
+            padding: 5rem 1.5rem;
+            background: linear-gradient(180deg, transparent, rgba(248, 225, 231, 0.5), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(212, 132, 156, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 40px rgba(212, 132, 156, 0.35);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Foto central destacada */
+        .gallery-item.featured {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item:not(.featured) {
+            aspect-ratio: 1;
+            min-height: 200px;
+        }
+
+        .gallery-item.featured {
+            min-height: 400px;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(74, 63, 74, 0.8));
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        /* Destaque especial para a foto favorita */
+        .featured-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, var(--rosa-medio), var(--lilas-escuro));
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(212, 132, 156, 0.4);
+        }
+
+        /* ============================================ */
+        /* SEÇÃO DE DECLARAÇÃO */
+        /* ============================================ */
+        .declaration-section {
+            padding: 5rem 1.5rem;
+            position: relative;
+        }
+
+        .declaration-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--branco);
+            padding: 3rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(212, 132, 156, 0.2);
+            position: relative;
+        }
+
+        /* Aspas decorativas */
+        .declaration-container::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--rosa-suave);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            line-height: 1;
+            opacity: 0.6;
+        }
+
+        .declaration-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            line-height: 2;
+            color: var(--texto-escuro);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .declaration-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .declaration-signature {
+            text-align: right;
+            margin-top: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--rosa-escuro);
+        }
+
+        /* ============================================ */
+        /* CONTADOR DE TEMPO */
+        /* ============================================ */
+        .counter-section {
+            padding: 4rem 1.5rem;
+            background: linear-gradient(135deg, var(--rosa-suave), var(--lilas));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .counter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5C30 5 35 15 35 25C35 32 30 38 30 38C30 38 25 32 25 25C25 15 30 5 30 5Z' fill='%23ffffff' fill-opacity='0.1'/%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .counter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.3rem, 4vw, 1.8rem);
+            text-align: center;
+            color: var(--texto-escuro);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .counter-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .counter-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem 0.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(212, 132, 156, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .counter-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .counter-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-weight: 700;
+            color: var(--rosa-escuro);
+            line-height: 1;
+        }
+
+        .counter-label {
+            font-size: 0.75rem;
+            color: var(--texto-claro);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* ============================================ */
+        /* RODAPÉ */
+        /* ============================================ */
+        .footer {
+            padding: 4rem 1.5rem;
+            text-align: center;
+            background: linear-gradient(180deg, var(--lilas), var(--rosa-suave));
+            position: relative;
+        }
+
+        .footer-message {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.2rem, 4vw, 1.6rem);
+            color: var(--texto-escuro);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-heart {
+            font-size: 2.5rem;
+            color: var(--rosa-escuro);
+            animation: heartBeat 1.5s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        .footer-tulip {
+            width: 50px;
+            height: 50px;
+            margin: 1.5rem auto;
+            opacity: 0.7;
+        }
+
+        .footer-date {
+            font-size: 0.85rem;
+            color: var(--texto-claro);
+            margin-top: 2rem;
+        }
+
+        /* Lanternas no rodapé */
+        .footer-lanterns {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .footer-lantern {
+            position: absolute;
+            width: 25px;
+            height: 35px;
+            background: radial-gradient(ellipse at center, rgba(255, 220, 150, 0.8) 0%, rgba(255, 180, 100, 0.5) 50%, transparent 70%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 15px rgba(255, 200, 120, 0.4);
+        }
+
+        /* ============================================ */
+        /* RESPONSIVIDADE PARA CELULAR */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                flex-direction: column;
+                align-items: flex-start;
+                padding-left: 50px;
+            }
+
+            .timeline-content {
+                width: 100%;
+            }
+
+            .timeline-content::before {
+                display: none;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.featured {
+                grid-column: span 1;
+                grid-row: span 1;
+                aspect-ratio: 1;
+            }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .declaration-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .declaration-container::before {
+                font-size: 5rem;
+                top: -10px;
+                left: 10px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero {
+                padding: 1.5rem;
+            }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+
+            .counter-item {
+                padding: 1rem 0.3rem;
+            }
+
+            .counter-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ============================================ */
+        /* EFEITO DE PARALAXE SUAVE */
+        /* ============================================ */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%;
+            background: 
+                radial-gradient(ellipse at 30% 20%, rgba(232, 180, 192, 0.2) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 60%, rgba(230, 213, 240, 0.25) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 90%, rgba(248, 225, 231, 0.3) 0%, transparent 50%);
+            z-index: -10;
+            pointer-events: none;
+            will-change: transform;
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================ -->
+    <!-- FUNDO PARALAX -->
+    <!-- ============================================ -->
+    <div class="parallax-bg" id="parallaxBg"></div>
+
+    <!-- ============================================ -->
+    <!-- BOTÃO DE MÚSICA -->
+    <!-- ============================================ -->
+    <button class="music-toggle" id="musicToggle" title="Tocar/Pausar música">
+        <svg id="playIcon" viewBox="0 0 24 24">
+            <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="pauseIcon" viewBox="0 0 24 24" style="display: none;">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    </button>
+
+    <!-- ============================================ -->
+    <!-- MÚSICA DE FUNDO -->
+    <!-- SUBSTITUA O SRC PELA URL DA MÚSICA "Still With You" -->
+    <!-- ============================================ -->
+    <audio id="bgMusic" loop autoplay>
+        <source src="Still With You - Jung Kook (youtube).mp3" type="audio/mpeg">
+        Seu navegador não suporta a reprodução de áudio.
+    </audio>
+
+    <div id="welcomeScreen" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--creme); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease;">
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--rosa-escuro); margin-bottom: 20px;">
+            Uma surpresa para você...
+        </h2>
+        <button id="startSurprise" style="padding: 15px 30px; background: linear-gradient(135deg, var(--rosa-medio), var(--lilas-escuro)); border: none; border-radius: 30px; color: white; font-family: 'Poppins', sans-serif; font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(212, 132, 156, 0.4);">
+            💌 Abrir Surpresa
+        </button>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- HERO SECTION -->
+    <!-- ============================================ -->
+    <section class="hero">
+        <!-- Tulipas decorativas -->
+        <svg class="tulip-decoration tulip-1" viewBox="0 0 100 100" fill="none">
+            <path d="M50 20C50 20 35 35 35 50C35 60 42 70 50 75C58 70 65 60 65 50C65 35 50 20 50 20Z" fill="#E8B4C0"/>
+            <path d="M50 75L50 95" stroke="#C9A8DC" stroke-width="3"/>
+            <path d="M50 60C50 60 60 55 65 50" stroke="#7A6B7A" stroke-width="2"/>
+            <path d="M50 70C50 70 40 65 35 60" stroke="#7A6B7A" stroke-width="2"/>
+        </svg>
+        <svg class="tulip-decoration tulip-2" viewBox="0 0 100 100" fill="none">
+            <path d="M50 20C50 20 35 35 35 50C35 60 42 70 50 75C58 70 65 60 65 50C65 35 50 20 50 20Z" fill="#E6D5F0"/>
+            <path d="M50 75L50 95" stroke="#D4849C" stroke-width="3"/>
+        </svg>
+        <svg class="tulip-decoration tulip-3" viewBox="0 0 100 100" fill="none">
+            <path d="M50 20C50 20 35 35 35 50C35 60 42 70 50 75C58 70 65 60 65 50C65 35 50 20 50 20Z" fill="#D4849C"/>
+            <path d="M50 75L50 95" stroke="#E8B4C0" stroke-width="3"/>
+        </svg>
+        <svg class="tulip-decoration tulip-4" viewBox="0 0 100 100" fill="none">
+            <path d="M50 20C50 20 35 35 35 50C35 60 42 70 50 75C58 70 65 60 65 50C65 35 50 20 50 20Z" fill="#F8E1E7"/>
+            <path d="M50 75L50 95" stroke="#C9A8DC" stroke-width="3"/>
+        </svg>
+
+        <!-- Lanternas flutuantes estilo Enrolados -->
+        <div class="lantern lantern-1"></div>
+        <div class="lantern lantern-2"></div>
+        <div class="lantern lantern-3"></div>
+        <div class="lantern lantern-4"></div>
+        <div class="lantern lantern-5"></div>
+
+        <div class="hero-content">
+            <p class="hero-subtitle">Dia das Mulheres</p>
+            <h1 class="hero-title">Para a Minha<br><span>Eterna Conquista</span></h1>
+            <p class="hero-description">
+                "Em um mundo de bilhões de estrelas, você é a que ilumina todos os meus caminhos."
+            </p>
+            <div class="hero-heart">💕</div>
+        </div>
+
+        <div class="scroll-indicator">
+            <span>Role para baixo</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- LINHA DO TEMPO -->
+    <!-- ============================================ -->
+    <section class="timeline-section">
+        <h2 class="section-title animate-on-scroll">Nossa História</h2>
+        
+        <div class="timeline">
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-content">
+                    <span class="timeline-date">📅 22 de Fevereiro de 2024</span>
+                    <h3 class="timeline-title">A Primeira Conversa</h3>
+                    <p class="timeline-description">
+                        O primeiro "oi". Uma troca de mensagens que parecia simples, mas que já demonstrava a fluidez e a sintonia do que estávamos prestes a construir.
+                    </p>
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-divider animate-on-scroll">
+                <svg class="tulip-icon" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 8C20 8 12 16 12 24C12 30 16 36 20 38C24 36 28 30 28 24C28 16 20 8 20 8Z" fill="#E8B4C0"/>
+                    <path d="M20 38L20 48" stroke="#C9A8DC" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-content">
+                    <span class="timeline-date">📅 24 de Março de 2024</span>
+                    <h3 class="timeline-title">O Primeiro "Eu Te Amo"</h3>
+                    <p class="timeline-description">
+                        Assistindo a Suzume juntos. Foi o momento exato em que o sentimento ganhou forma em palavras e tivemos a certeza da nossa conexão.
+                    </p>
+                    
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+
+            <div class="timeline-divider animate-on-scroll">
+                <svg class="tulip-icon" viewBox="0 0 40 40" fill="none">
+                    <path d="M20 8C20 8 12 16 12 24C12 30 16 36 20 38C24 36 28 30 28 24C28 16 20 8 20 8Z" fill="#E6D5F0"/>
+                    <path d="M20 38L20 48" stroke="#D4849C" stroke-width="2"/>
+                </svg>
+            </div>
+
+            <div class="timeline-item animate-on-scroll">
+                <div class="timeline-content">
+                    <span class="timeline-date">📅 15 de Junho de 2024 às 21:08</span>
+                    <h3 class="timeline-title">O Pedido de Namoro</h3>
+                    <p class="timeline-description">
+                        A oficialização da nossa parceria. O início de um compromisso sério, onde decidimos caminhar na mesma direção e enfrentar a vida lado a lado.
+                    </p>
+                    
+                </div>
+                <div class="timeline-dot"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- GALERIA DE FOTOS -->
+    <!-- ============================================ -->
+    <section class="gallery-section">
+        <h2 class="section-title animate-on-scroll">Momentos Inesquecíveis</h2>
+        
+        <div class="gallery-grid">
+            
+            <div class="gallery-item featured animate-on-scroll">
+                <span class="featured-badge">⭐ Favorita</span>
+                <img 
+                    src="IMG-20240707-WA0016.jpg" 
+                    alt="Seu sorriso que me encanta"
+                    loading="lazy"
+                >
+                <div class="gallery-overlay">
+                    <h3>Seu Sorriso que me Encanta</h3>
+                    <p>Sua foto favorita - seu biquinho e meu sorriso</p>
+                </div>
+            </div>
+
+            <div class="gallery-item animate-on-scroll">
+                <img 
+                    src="20240615_181202.jpg" 
+                    alt="O Pedido de Namoro na Festa Junina"
+                    loading="lazy"
+                >
+                <div class="gallery-overlay">
+                    <h3>🌹</h3>
+                    <p>Amar é encontrar na felicidade do outro a própria felicidade.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item animate-on-scroll">
+                <img 
+                    src="IMG-20240616-WA0013.jpg" 
+                    alt="Surpresa com o urso de pelúcia"
+                    loading="lazy"
+                >
+                <div class="gallery-overlay">
+                    <h3>💫</h3>
+                    <p>O amor verdadeiro não tem final feliz, porque simplesmente não tem final.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- SEÇÃO DE DECLARAÇÃO -->
+    <!-- ============================================ -->
+    <section class="declaration-section">
+        <h2 class="section-title animate-on-scroll">Minha Declaração</h2>
+        
+        <div class="declaration-container animate-on-scroll">
+            <div class="declaration-text">
+                <!-- ============================================ -->
+                <!-- SUBSTITUA O TEXTO ABAIXO PELA SUA DECLARAÇÃO -->
+                <!-- ============================================ -->
+                <p>
+                    Rita, minha eterna conquista e o farol dos meus dias.
+                </p>
+                <p>
+                    Assim como as lanternas flutuantes que iluminam a escuridão, você trouxe luz e direção 
+                    para a minha vida. Nós construímos algo que transcende o momento: uma parceria madura, 
+                    reconfortante e real, onde cada desafio e vitória nos fortalece.
+                </p>
+                <p>
+                    Nosso amor não vive de promessas vazias, mas de uma devoção diária. Da mesma forma que
+                    a engenharia impecável de um Lamborghini Aventador, nossa relação é movida
+                    por potência, cuidado constante e a certeza de que fomos feitos para ir longe na estrada da vida.
+                </p>
+                <p>
+                    Você é a minha tulipa mais rara — forte, elegante e dona de uma beleza que me cativa
+                    todos os dias. Que possamos continuar sendo o porto seguro um do outro, com a seriedade
+                    e o respeito de quem já constrói um futuro sólido juntos.
+                </p>
+                <p style="font-style: italic; color: var(--rosa-escuro);">
+                    Amo cada detalhe seu, hoje e para sempre. 💕
+                </p>
+                
+                <div class="declaration-signature">
+                    Com todo meu amor,<br>
+                    Seu eterno apaixonado
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- CONTADOR DE TEMPO -->
+    <!-- ============================================ -->
+    <section class="counter-section">
+        <h2 class="counter-title">Nosso Amor em Números</h2>
+        <p style="text-align: center; color: var(--texto-claro); margin-bottom: 2rem; font-size: 0.9rem;">
+            Contando cada segundo desde o nosso primeiro "sim"
+        </p>
+        
+        <div class="counter-grid">
+            <div class="counter-item">
+                <div class="counter-number" id="years">0</div>
+                <div class="counter-label">Anos</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="months">0</div>
+                <div class="counter-label">Meses</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="days">0</div>
+                <div class="counter-label">Dias</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="hours">0</div>
+                <div class="counter-label">Horas</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="minutes">0</div>
+                <div class="counter-label">Minutos</div>
+            </div>
+            <div class="counter-item">
+                <div class="counter-number" id="seconds">0</div>
+                <div class="counter-label">Segundos</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================ -->
+    <!-- RODAPÉ -->
+    <!-- ============================================ -->
+    <footer class="footer">
+        <div class="footer-lanterns">
+            <div class="footer-lantern" style="top: 20%; left: 10%; animation: lanternFloat 9s ease-in-out infinite;"></div>
+            <div class="footer-lantern" style="top: 40%; right: 15%; animation: lanternFloat 11s ease-in-out infinite 2s;"></div>
+            <div class="footer-lantern" style="top: 60%; left: 20%; animation: lanternFloat 8s ease-in-out infinite 4s;"></div>
+        </div>
+
+        <p class="footer-message">
+            "Você é a melhor parte<br>de todos os meus dias"
+        </p>
+        
+        <div class="footer-heart">💖</div>
+        
+        <!-- Tulipa decorativa no rodapé -->
+        <svg class="footer-tulip" viewBox="0 0 50 50" fill="none">
+            <path d="M25 10C25 10 15 20 15 30C15 38 20 44 25 46C30 44 35 38 35 30C35 20 25 10 25 10Z" fill="#E8B4C0"/>
+            <path d="M25 46L25 58" stroke="#C9A8DC" stroke-width="2"/>
+            <path d="M25 35C25 35 32 32 35 28" stroke="#7A6B7A" stroke-width="1.5"/>
+            <path d="M25 40C25 40 18 37 15 33" stroke="#7A6B7A" stroke-width="1.5"/>
+        </svg>
+        
+        <p class="footer-date">
+            Feito com 💕 para Rita<br>
+            Dia das Mulheres • 2026
+        </p>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script>
+        // ============================================
+        // JAVASCRIPT: CONTROLE DA TELA DE CONVITE
+        // Insira isso junto com os outros scripts no final do arquivo
+        // ============================================
+        document.getElementById('startSurprise').addEventListener('click', function() {
+            
+            // 1. O clique humano autoriza o navegador a tocar a música
+            const bgMusic = document.getElementById('bgMusic');
+            bgMusic.play();
+            
+            // 2. Atualiza os ícones do botão de música lá em cima
+            document.getElementById('playIcon').style.display = 'none';
+            document.getElementById('pauseIcon').style.display = 'block';
+            document.getElementById('musicToggle').classList.add('playing');
+            isPlaying = true;
+            
+            // 3. Faz a tela de convite desaparecer suavemente
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            welcomeScreen.style.opacity = '0';
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+            }, 1000);
+        });
+        // ============================================
+        // CONFIGURAÇÃO DO CONTADOR DE TEMPO
+        // SUBSTITUA A DATA ABAIXO PELA DATA DO INÍCIO DO NAMORO
+        // Formato: 'YYYY-MM-DDTHH:MM:SS'
+        // ============================================
+        const START_DATE = new Date('2024-06-15T21:08:00'); // Data do pedido de namoro
+
+        // ============================================
+        // CONTADOR DE TEMPO EM TEMPO REAL
+        // ============================================
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - START_DATE;
+
+            // Cálculos
+            const seconds = Math.floor(diff / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            
+            // Cálculo de meses e anos
+            let years = now.getFullYear() - START_DATE.getFullYear();
+            let months = now.getMonth() - START_DATE.getMonth();
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            // Ajuste para dias restantes no mês atual
+            const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+            let remainingDays = now.getDate() - START_DATE.getDate();
+            if (remainingDays < 0) {
+                months--;
+                remainingDays += daysInMonth;
+            }
+
+            // Atualiza os elementos
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = remainingDays;
+            document.getElementById('hours').textContent = (hours % 24).toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = (minutes % 60).toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = (seconds % 60).toString().padStart(2, '0');
+        }
+
+        // Atualiza a cada segundo
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Primeira chamada imediata
+
+        // ============================================
+        // ANIMAÇÃO DE ENTRADA AO ROLAR (SCROLL)
+        // ============================================
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observa todos os elementos com a classe animate-on-scroll
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ============================================
+        // EFEITO PARALAX SUAVE NO FUNDO
+        // ============================================
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const parallaxBg = document.getElementById('parallaxBg');
+                    if (parallaxBg) {
+                        parallaxBg.style.transform = `translateY(${scrolled * 0.3}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+       // ============================================
+        // CONTROLE DE MÚSICA (REFATORADO PARA ARQUIVO LOCAL)
+        // ============================================
+        const musicToggle = document.getElementById('musicToggle');
+        const bgMusic = document.getElementById('bgMusic');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        let isPlaying = false;
+
+        // Removemos a verificação de URL externa, focando apenas no estado de Play/Pause
+        musicToggle.addEventListener('click', () => {
+            
+            if (isPlaying) {
+                // Lógica de pausar o áudio e voltar o ícone para "Play"
+                bgMusic.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                musicToggle.classList.remove('playing');
+                
+            } else {
+                // Lógica para iniciar o áudio e mudar o ícone para "Pause"
+                bgMusic.play().catch(e => {
+                    // Se o navegador bloquear o autoplay, avisa no console de forma limpa
+                    console.error('Navegador bloqueou a execução imediata:', e);
+                });
+                
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                musicToggle.classList.add('playing');
+            }
+            
+            // Inverte o estado atual da variável booleana
+            isPlaying = !isPlaying;
+        });
+
+        // ============================================
+        // ANIMAÇÃO SUAVE DOS NÚMEROS DO CONTADOR
+        // ============================================
+        function animateValue(id, start, end, duration) {
+            const obj = document.getElementById(id);
+            const range = end - start;
+            const minTimer = 50;
+            let stepTime = Math.abs(Math.floor(duration / range));
+            stepTime = Math.max(stepTime, minTimer);
+            
+            let startTime = new Date().getTime();
+            let endTime = startTime + duration;
+            let timer;
+
+            function run() {
+                let now = new Date().getTime();
+                let remaining = Math.max((endTime - now) / duration, 0);
+                let value = Math.round(end - (remaining * range));
+                obj.innerHTML = value;
+                if (value == end) {
+                    clearInterval(timer);
+                }
+            }
+
+            timer = setInterval(run, stepTime);
+            run();
+        }
+
+        // ============================================
+        // DETECÇÃO DE TOQUE PARA MOBILE
+        // ============================================
+        document.addEventListener('touchstart', function() {}, {passive: true});
+
+        // ============================================
+        // PREVENIR ZOOM EM INPUTS NO iOS
+        // ============================================
+        document.addEventListener('gesturestart', function(e) {
+            e.preventDefault();
+        });
+    </script>
+</body>
+</html>
